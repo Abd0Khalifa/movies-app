@@ -2,10 +2,13 @@ import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { axiosInstance } from "../Network/axiosInstace";
 import { LanguageContext } from "../Context/LanguageContext";
+import { ThemeContext } from "../Context/ThemeContext";
 
 function MovieShow() {
     const { id } = useParams(); 
     const { contextLang } = useContext(LanguageContext); 
+    const { themeContext } = useContext(ThemeContext)
+
     const [movie, setMovie] = useState({}); 
 
     useEffect(() => {
@@ -33,8 +36,8 @@ function MovieShow() {
                 </div>
 
                 <div className="col-lg-7 col-md-6 col-sm-12">
-                    <h2 className="text-white">{movie.title}</h2>
-                    <p className="text-light">{movie.overview}</p>
+                    <h2 className={`${themeContext === "dark" ? "text-white" : "text-dark"}`}>{movie.title}</h2>
+                    <p className={`${themeContext === "dark" ? "text-white" : "text-dark"}`}>{movie.overview}</p>
                     <p className="text-warning">
                         <strong>Popularity:</strong> {movie.popularity}
                     </p>
